@@ -24,6 +24,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import Animated from 'react-native-reanimated';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -33,6 +34,7 @@ function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
+      <Animated.View style={styles.animatedView} />
       <Text
         style={[
           styles.sectionTitle,
@@ -112,6 +114,11 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  animatedView: {
+    width: 100,
+    height: 100,
+    backgroundColor: 'violet',
   },
 });
 
