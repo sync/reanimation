@@ -8,6 +8,7 @@
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -24,17 +25,30 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import Animated from 'react-native-reanimated';
+import Animated, {useSharedValue} from 'react-native-reanimated';
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
 function Section({children, title}: SectionProps): React.JSX.Element {
+  const width = useSharedValue(100);
+
+  const handlePress = () => {
+    width.value = width.value + 50;
+  };
+
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
-      <Animated.View style={styles.animatedView} />
+      <Animated.View
+        style={{
+          width,
+          height: 100,
+          backgroundColor: 'violet',
+        }}
+      />
+      <Button onPress={handlePress} title="Click me" />
       <Text
         style={[
           styles.sectionTitle,
@@ -114,11 +128,6 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
-  },
-  animatedView: {
-    width: 100,
-    height: 100,
-    backgroundColor: 'violet',
   },
 });
 
